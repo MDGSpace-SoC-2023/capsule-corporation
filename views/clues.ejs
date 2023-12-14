@@ -1,0 +1,42 @@
+<%- include ('../views/includes/head', {pagetitle: 'Upcoming Hunts'}) %>
+    <link rel="stylesheet" href="/CSS/clues.css">
+</head>                                                                                
+<body>
+    <div class="center">
+        <h1 id="top">
+            <button class="btn-close">&times;</button>
+            <div id="score">
+                <h2>Score: 0</h2>
+            </div>
+            <br>
+            <div class="centre-buttons">
+                <button class="button button1" >    Leaderboard    </button>
+            </div>
+        </h1>
+        <form>
+            <div>
+                <div id="clues">
+                    <h1>Clues</h1>
+                </div>
+            </div>
+        </form>
+        <div class="center-buttons">
+            <button class="button button1" text-align="center" onclick="toggle()">Show Hint</button>
+        </div>
+        <div id = "bottom">
+            <p id="hint" style="display:none">Hint: hint will show</p>
+        </div>
+    </div>
+
+    <script>
+        function toggle() {
+            var x = document.getElementById("hint");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } 
+            else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+<%- include ('./includes/foot') %>
