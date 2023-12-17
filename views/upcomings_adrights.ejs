@@ -16,21 +16,21 @@
         <h2>Which Hunt to start</h2> 
      </div>
 
-     <div class="form" id="form"> 
-
-      <!-- form -->
-      <% for(let name of names) { %>
-        <button class="addednames" style="padding: 10px;
-        background: #0f0;
-        color: #000;
-        font-weight: 600;
-        font-size: 1.35em;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        margin-top: 2rem;"><%= name %></button>
-     <% } %>
-
-     </div> 
+      <form action="/strthunt" method="post">
+         <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+      <div class="form" id="form"> 
+         <select name="huntname" id="huntname" class="form-control-input" required>
+            <option value="" disabled selected>Select Hunt</option>
+            <% for(var i=0; i<names.length; i++) { %>
+               <option value="<%= names[i] %>"><%= names[i] %></option>
+            <% } %>
+         </select>
+         <div class="inputbox">
+            <input type="submit" value="Load" style="padding: 10px; background: #0f0;color: #000;font-weight: 600;font-size: 1.35em;letter-spacing: 0.05em;cursor: pointer;margin-top: 2rem;">
+         </div>
+      </div> 
+      
+      </form>
 
     </div> 
 

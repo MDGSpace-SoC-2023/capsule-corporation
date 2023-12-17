@@ -16,6 +16,7 @@ const errorHandler = require('./middlewares/error-handler');
 const checkAuthStatus = require('./middlewares/check-auth');
 const team_membersController = require('./controllers/team.controller');
 const authController = require('./controllers/auth.controller');
+const startHuntController = require('./controllers/starthunt.controller');
 
 if (app.use(
     cors({
@@ -74,9 +75,8 @@ app.get('/huntinfo', (req, res) => {
     res.render('huntinfo');
 });
 
-app.get('/hunt', (req, res) => {
-    res.render('hunt');
-});
+app.get('/starter', bodyParser.urlencoded(), startHuntController.loadnames);
+app.post('/strthunt', bodyParser.urlencoded(), startHuntController.loadHunt);
 
 app.post('/savehunt', bodyParser.urlencoded(), huntinfoController.storeData);
 
@@ -85,7 +85,11 @@ app.post('/registerteam', bodyParser.urlencoded(), team_membersController.storeD
 app.get('/upcomings', bodyParser.urlencoded(), upcomingsController.showhunts);
 app.get('/upcomings_adrights', bodyParser.urlencoded(), upcomingsController.showhunts2);
 
+app.get('/starthunt', bodyParser.urlencoded(), startHuntController.startHunt);
 
+app.get('/start' , (req, res) => {
+    res.render('start');
+});
 app.get('/bstart',(req,res)=>{
     res.render('beforestart1');
 });
@@ -95,6 +99,14 @@ app.post('/logout', authController.logout);
 
 app.get('/menu_client',(req,res)=>{
     res.render('menu_client');
+});
+
+app.get('/hunt2',(req,res)=>{
+    res.render('hunt2');
+});
+
+app.get('/Loadmaps', (req, res) => {
+    res.render('Loadmaps');
 });
 
 app.get('/team_members', bodyParser.urlencoded(), team_membersController.loadnames);

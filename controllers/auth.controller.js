@@ -22,9 +22,9 @@ function getLogin(req, res) {
 
 async function login(req, res) {
     const user = new User(req.body.enrollementNo, req.body.password);
-    console.log(req.body);
+    // console.log(req.body);
     const existingUser = await user.getUserWithSameEnrollementNo();
-    console.log(existingUser);
+    // console.log(existingUser);
 
     if (!existingUser) {
         return res.redirect('/login');

@@ -189,30 +189,24 @@ input[type="submit"]:active
   }
 }
 
-.addednames{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-  color:  #0f0;
-  font-weight: 500;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.5rem;
-}
-.form-control-input {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Add transitions for smoother changes */
-}
+hr {
+    color: #333; /* Set the color of the line */
+    background-color: #333; /* Set the background color of the line */
+    height: 2px; /* Set the height (thickness) of the line */
+    margin: 20px 0; /* Set the margin above and below the line */
+  }
 
-.form-control-input:hover,
-.form-control-input:focus {
-  border-color: #3498db; /* Change border color on hover or focus */
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Add a subtle box shadow on hover or focus */
-}
+  .button{
+    padding: 10px;
+  background: #0f0;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 5.5rem;
+  }
+
+
+
