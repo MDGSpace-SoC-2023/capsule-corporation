@@ -4,9 +4,16 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 const csrf = require('csurf');
+const geolaocation = require('geolocation');
 const expressSession = require('express-session');
 const authRoutes = require('./routes/auth.routes');
 const app = express();
+
+// const http = require('http');
+// const server = http.createServer(app);
+// const WebSocket = require('ws');
+// const wss = new WebSocket.Server({server});
+
 const db = require('./data/database');
 const huntinfoController = require('./controllers/huntinfo.controller');
 const upcomingsController = require('./controllers/upcomings.controller');
@@ -17,6 +24,8 @@ const checkAuthStatus = require('./middlewares/check-auth');
 const team_membersController = require('./controllers/team.controller');
 const authController = require('./controllers/auth.controller');
 const startHuntController = require('./controllers/starthunt.controller');
+const enterHuntController = require('./controllers/enterhunt.controller');
+
 
 if (app.use(
     cors({
@@ -76,7 +85,11 @@ app.get('/huntinfo', (req, res) => {
 });
 
 app.get('/starter', bodyParser.urlencoded(), startHuntController.loadnames);
+app.get('/starter2' , bodyParser.urlencoded(), enterHuntController.loadnames);
+
+
 app.post('/strthunt', bodyParser.urlencoded(), startHuntController.loadHunt);
+app.post('/strthunt2', bodyParser.urlencoded(), enterHuntController.enterHunt);
 
 app.post('/savehunt', bodyParser.urlencoded(), huntinfoController.storeData);
 
@@ -105,9 +118,15 @@ app.get('/hunt2',(req,res)=>{
     res.render('hunt2');
 });
 
+app.get('/clues',(req,res)=>{
+    res.render('clues');
+});
+
 app.get('/Loadmaps', (req, res) => {
     res.render('Loadmaps');
 });
+
+
 
 app.get('/team_members', bodyParser.urlencoded(), team_membersController.loadnames);
 
@@ -124,9 +143,27 @@ db.connectToDatabase().then(function (){
 });
 
 
+// wss.on('connection', (ws) => {
+//     console.log('A user connected');
+//     ws.send('Welcome new client');
+
+//     ws.on('message', (message) => {
+//         console.log(`Received message: ${message}`);
+//         // ws.send('Received message: ' + message)
+
+//         // if (message === 'Serve Hunt Pages') {
+//         //     ws.send('serving');
+//         //     console.log('serving');
+//         // }
+//     });
 
 
 
-//a logout not added in header related to login checkauthjs local isauth
-// when hunt is started then client should get that specific clue
-// leaderboard  // start of hunt  //geofencing  //scoring system  // channel i authentication
+//     ws.on('close', () => {
+//         console.log('User disconnected');
+//     });
+// });
+
+
+// client - admin connection
+// leaderboard   //scoring system  // channel i authentication

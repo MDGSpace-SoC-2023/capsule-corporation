@@ -2,41 +2,62 @@
     <link rel="stylesheet" href="/CSS/clues.css">
 </head>                                                                                
 <body>
-    <div class="center">
-        <h1 id="top">
-            <button class="btn-close">&times;</button>
+    <div class="center" id="center">
+        <div id="top">
             <div id="score">
-                <h2>Score: 0</h2>
+                <h2 id="myScore">Score: 0</h2>
             </div>
-            <br>
             <div class="centre-buttons">
-                <button class="button button1" >    Leaderboard    </button>
-            </div>
-        </h1>
-        <form>
+                <button onclick="openPopup()" class="btn" >    Leaderboard    </button>
+            </div>            
+        </div>
+        <div class="form" id="form">
             <div>
                 <div id="clues">
-                    <h1>Clues</h1>
+                    <h1 id="displayClue"><%= clues[0] %></h1>
+                    <button class="btn" id="locationChecker" style="margin-top: 2rem; margin-left: 3rem;" onclick="getCurrentLocation()" >Check My Location</button>
                 </div>
             </div>
-        </form>
-        <div class="center-buttons">
-            <button class="button button1" text-align="center" onclick="toggle()">Show Hint</button>
+        </div>
+        <div class="center-buttons" id="center_buttons">
+            <button class="button button1" text-align="center" onclick="toggle()">
+                <span id="buttonText">Show Hint</span>
+            </button>
         </div>
         <div id = "bottom">
-            <p id="hint" style="display:none">Hint: hint will show</p>
+            <p id="hint" style="display:none"><%= hints[0] %></p>
         </div>
+
+        <div class="leaderboard" id="leaderboard">
+            <h2>Leaderboard</h2>
+            <button class="btn-close" onclick="closePopup()">&times;</button>
+        </div>
+
+
+
     </div>
 
     <script>
-        function toggle() {
-            var x = document.getElementById("hint");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } 
-            else {
-                x.style.display = "none";
+        myLocations = "<%= locations %>";
+        myLocations = myLocations.split(",");
+        managedLocations = [];
+        for (let i = 0; i < myLocations.length; i += 2) {
+            if (myLocations[i + 1] !== undefined) {
+                managedLocations.push([myLocations[i], myLocations[i + 1]]);
+            } else {
+                managedLocations.push([myLocations[i]]);
             }
         }
+        // console.log(managedLocations);
+
+        myClues = "<%= clues %>";
+        myClues = myClues.split(",");
+        // console.log(myClues);
+
+        myHints = "<%= hints %>";
+        myHints = myHints.split(",");
+        // console.log(myHints);
     </script>
+    <!-- <script src="/scripts/client.js"></script> -->
+    <script src="/scripts/clues.js"></script>
 <%- include ('./includes/foot') %>
