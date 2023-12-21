@@ -36,7 +36,7 @@
       <div class="inputBox"> 
 
       <div class="inputBox">
-        <button class="button" onclick="toggleTimer()">Pause the hunt</button>
+        <button class="button" onclick="toggleTimer()"></button>
       </div>
 
       
@@ -48,6 +48,8 @@
 
   </section> <!-- partial --> 
   <script>
+    let hunt_to_strt = "<%= startedHunt %>";
+
     const startingMinutes = 10;
     let time = startingMinutes * 60;
     const countdownEl = document.getElementById('countdown');
@@ -85,7 +87,7 @@
     document.querySelector('button').innerText = "Start Timer";
   </script>
   
-  <!-- <script src="/scripts/admin.js"></script> -->
+  <script src="/scripts/admin.js"></script>
 
  </body>
 

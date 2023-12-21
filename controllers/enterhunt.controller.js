@@ -44,7 +44,8 @@ function enterHunt(req,res){
         res.render('clues',{
             clues : clues,
             hints : hints,
-            locations : locations
+            locations : locations,
+            huntname : hunt.huntname
         
         });
     }).catch(function (err) {

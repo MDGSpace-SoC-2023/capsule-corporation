@@ -37,6 +37,10 @@
 
     </div>
 
+    <div id="center2">
+        <p>Hunt has not started yet!</p>
+    </div>
+
     <script>
         myLocations = "<%= locations %>";
         myLocations = myLocations.split(",");
@@ -57,7 +61,10 @@
         myHints = "<%= hints %>";
         myHints = myHints.split(",");
         // console.log(myHints);
+
+        myHuntname = "<%= huntname %>";
+        // console.log(myHuntname);
     </script>
-    <!-- <script src="/scripts/client.js"></script> -->
+    <script src="/scripts/client.js"></script>
     <script src="/scripts/clues.js"></script>
 <%- include ('./includes/foot') %>

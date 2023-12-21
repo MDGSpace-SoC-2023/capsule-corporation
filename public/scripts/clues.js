@@ -3,6 +3,15 @@ let j=0;
 let score =0;
 let isCompleted = false;
 
+function dontshow(){
+    let center = document.getElementById("center");
+    center.style.display = "none";
+
+    let center2 = document.getElementById("center2");
+    center2.style.display = "block";
+}
+dontshow();
+
 setInterval(function(){
     if (score > 0) {
         if (isCompleted == false) {

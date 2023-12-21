@@ -24,6 +24,31 @@ body{
   height: fit-content;
   min-height: 15rem;
 }
+
+#center2{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  height: fit-content;
+  min-height: 15rem;
+  display: none;
+  color: #000; /* Set the text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding-top: 5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d13202;
+
+  
+
+}
+
 #top{
   display: flex;
   flex-direction: row;

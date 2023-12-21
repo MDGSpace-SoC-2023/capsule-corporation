@@ -9,10 +9,10 @@ const expressSession = require('express-session');
 const authRoutes = require('./routes/auth.routes');
 const app = express();
 
-// const http = require('http');
-// const server = http.createServer(app);
-// const WebSocket = require('ws');
-// const wss = new WebSocket.Server({server});
+const http = require('http');
+const server = http.createServer(app);
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({server});
 
 const db = require('./data/database');
 const huntinfoController = require('./controllers/huntinfo.controller');
@@ -98,7 +98,7 @@ app.post('/registerteam', bodyParser.urlencoded(), team_membersController.storeD
 app.get('/upcomings', bodyParser.urlencoded(), upcomingsController.showhunts);
 app.get('/upcomings_adrights', bodyParser.urlencoded(), upcomingsController.showhunts2);
 
-app.get('/starthunt', bodyParser.urlencoded(), startHuntController.startHunt);
+app.post('/starthunt', bodyParser.urlencoded(), startHuntController.startHunt);
 
 app.get('/start' , (req, res) => {
     res.render('start');
@@ -134,7 +134,7 @@ app.get('/upcomings_client', bodyParser.urlencoded(), upcomingsController.showhu
 app.use(errorHandler);
 
 db.connectToDatabase().then(function (){
-    app.listen(3000, () => {
+    server.listen(3000, () => {
         console.log('App listening on port 3000!');
     });
 })
@@ -142,28 +142,44 @@ db.connectToDatabase().then(function (){
     console.log("Error connecting to database"+err);
 });
 
+let lastMessage = null;
 
-// wss.on('connection', (ws) => {
-//     console.log('A user connected');
-//     ws.send('Welcome new client');
+wss.on('connection', (ws) => {
+    console.log('A user connected');
+    ws.send('Welcome new client');
 
-//     ws.on('message', (message) => {
-//         console.log(`Received message: ${message}`);
-//         // ws.send('Received message: ' + message)
+    if (lastMessage) {
+        ws.send(lastMessage);
+    }
 
-//         // if (message === 'Serve Hunt Pages') {
-//         //     ws.send('serving');
-//         //     console.log('serving');
-//         // }
-//     });
+    ws.on('message', (message) => {
+        
+        console.log(`Received message: ${message}`);
+        message = JSON.parse(message);
+        // console.log(message[1]);
+        if (message[0] == 'Serve') {
+            console.log('Starting admin pages');
+            // Broadcast a message to all clients to start serving admin pages
+            wss.clients.forEach((client) => {
+                console.log('client')
+                let data = ['startedAdminPages', message[1]];
+                client.send(JSON.stringify(data));
+                lastMessage = JSON.stringify(data);
+                
+            });
+        }
+
+    });
 
 
 
-//     ws.on('close', () => {
-//         console.log('User disconnected');
-//     });
-// });
+    ws.on('close', () => {
+        console.log('User disconnected');
+        wss.clients.forEach((client) => {
+            client.send('stoppedAdminPages');
+        });
+    });
+});
 
 
-// client - admin connection
-// leaderboard   //scoring system  // channel i authentication
+// leaderboard   // channel i authentication   // edit hunt

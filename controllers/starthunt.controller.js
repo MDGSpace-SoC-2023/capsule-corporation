@@ -34,7 +34,12 @@ function startHunt(req,res){
     // some geofencing code
 
     // some code to start the hunt
-    res.render('hunt2')
+    let startedHunt = req.body.huntname;
+    // console.log(startedHunt);
+    res.render('hunt2',{
+        startedHunt : startedHunt
+    
+    })
 }
 
 function endHunt(req,res){

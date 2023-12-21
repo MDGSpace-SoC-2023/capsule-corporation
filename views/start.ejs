@@ -27,9 +27,12 @@
       <div class="inputBox"> 
 
       <div class="inputBox"> 
-        <form action="/starthunt" method="get">
+        <form action="/starthunt" method="post" >
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            
+            <input type="text" name="huntname" style="display: none;" value=<%= hunt.huntname %> >
 
-            <input type="submit" value="Start">
+            <input type="submit" value="Start"> 
         </form>
 
       </div> 
