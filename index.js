@@ -122,8 +122,12 @@ app.get('/clues',(req,res)=>{
     res.render('clues');
 });
 
-app.get('/Loadmaps', (req, res) => {
-    res.render('Loadmaps');
+app.get('/alregis', (req, res) => {
+    res.render('already_registered');
+});
+
+app.get('/unreg',(req,res)=>{
+    res.render('unregistered');
 });
 
 
@@ -143,6 +147,7 @@ db.connectToDatabase().then(function (){
 });
 
 let lastMessage = null;
+let scores=[];
 
 wss.on('connection', (ws) => {
     console.log('A user connected');
@@ -155,7 +160,10 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         
         console.log(`Received message: ${message}`);
-        message = JSON.parse(message);
+        if (message != 'requestLeaderboard' ){
+
+            message = JSON.parse(message);
+        }
         // console.log(message[1]);
         if (message[0] == 'Serve') {
             console.log('Starting admin pages');
@@ -168,6 +176,32 @@ wss.on('connection', (ws) => {
                 
             });
         }
+        if (message == 'requestLeaderboard') {
+            console.log('requesting leaderboard');
+            // Broadcast a message to all clients to start serving admin pages
+            wss.clients.forEach((client) => {
+                console.log('client')
+                client.send('giveScores');
+                
+            });
+        }
+        if (message[0] == 'Score') {
+            console.log('Scores found');
+            scores.push([message[1], message[2]]);
+            
+            
+            if (scores.length == wss.clients.size) {
+                scores.sort((a, b) => b[0] - a[0]);
+                console.log(scores);
+                console.log('All scores received, sending scores to all clients');
+                wss.clients.forEach((client) => {
+                    let data = ['scores', scores];
+                    client.send(JSON.stringify(data));
+                });
+                scores = [];
+                
+            }
+        }
 
     });
 
@@ -177,6 +211,7 @@ wss.on('connection', (ws) => {
         console.log('User disconnected');
         wss.clients.forEach((client) => {
             client.send('stoppedAdminPages');
+            // lastMessage = '';
         });
     });
 });

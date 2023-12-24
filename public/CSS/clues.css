@@ -59,6 +59,8 @@ body{
 }
 .leaderboard{
   display: none;
+  overflow-y: scroll;
+  height: 30rem;
 }
 
 .btn{
@@ -79,8 +81,13 @@ body{
   box-sizing: border-box;
 }
 
+#fixed{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .btn-close {
-  position: absolute;
   background: #d13202;
     border-radius: 50%;
     width: 40px;
@@ -137,4 +144,12 @@ body{
   font-size: 20px;
   color: #04AA6D;
   font-weight: bold;
+}
+
+#leaderboardTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  /* display: none; */
 }

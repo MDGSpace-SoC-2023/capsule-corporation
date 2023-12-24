@@ -22,8 +22,19 @@ function loadnames(req, res) {
 
 
 
-function enterHunt(req,res){
-    // const huntname = req.body.huntname;
+ async function enterHunt(req,res){
+    const huntname = req.body.huntname;
+const teamname = req.body.teamname;
+console.log(teamname);
+
+    const team = await database.getDb().collection(huntname).findOne({teamname : req.body.teamname});
+    console.log(team);
+    if(!team){
+        res.redirect('/unreg');
+        return;
+    }
+
+
     let clues = [];
     let hints = [];
     let locations = [];
@@ -45,7 +56,8 @@ function enterHunt(req,res){
             clues : clues,
             hints : hints,
             locations : locations,
-            huntname : hunt.huntname
+            huntname : hunt.huntname,
+            teamname : teamname
         
         });
     }).catch(function (err) {

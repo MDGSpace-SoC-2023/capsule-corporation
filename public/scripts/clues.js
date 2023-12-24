@@ -1,6 +1,6 @@
 let i=0;
 let j=0;
-let score =0;
+
 let isCompleted = false;
 
 function dontshow(){
@@ -43,29 +43,19 @@ function openPopup(){
     let form = document.getElementById("form");
     let center_buttons = document.getElementById("center_buttons");
     let leaderboard = document.getElementById("leaderboard");
+    // let table = document.getElementById("leaderboardTable");
 
     top.style.display = "none";
     bottom.style.display = "none";
     form.style.display = "none";
     center_buttons.style.display = "none";
-    leaderboard.style.display = "block";
+    leaderboard.style.display = "flex";
+    leaderboard.style.flexDirection = "column";
+    // table.style.display = "block";
 
 }
 
-function closePopup(){
-    let top = document.getElementById("top");
-    let bottom = document.getElementById("bottom");
-    let form = document.getElementById("form");
-    let center_buttons = document.getElementById("center_buttons");
-    let leaderboard = document.getElementById("leaderboard");
 
-    top.style.display = "flex";
-    bottom.style.display = "block";
-    form.style.display = "block";
-    center_buttons.style.display = "block";
-    leaderboard.style.display = "none";
-
-}
 
 function getCurrentLocation(){
     if (navigator.geolocation) {

@@ -8,7 +8,7 @@
                 <h2 id="myScore">Score: 0</h2>
             </div>
             <div class="centre-buttons">
-                <button onclick="openPopup()" class="btn" >    Leaderboard    </button>
+                <button onclick="openPopup(),requestLeaderboard()" class="btn" >    Leaderboard    </button>
             </div>            
         </div>
         <div class="form" id="form">
@@ -29,19 +29,28 @@
         </div>
 
         <div class="leaderboard" id="leaderboard">
-            <h2>Leaderboard</h2>
-            <button class="btn-close" onclick="closePopup()">&times;</button>
+            <div id="fixed">
+                <h2 style="margin-top: 1rem;">Leaderboard</h2>
+                <button onclick="refreshPage()" class="btn-close">&#x21BB;</button>
+                <button class="btn-close" onclick="closePopup()">&times;</button>
+            </div>
+            <div id="insLeaderboard"></div>
         </div>
 
 
 
-    </div>
+    </div> 
 
     <div id="center2">
         <p>Hunt has not started yet!</p>
     </div>
 
     <script>
+        let intervalid;
+        let score = 0;
+        let scores;
+        let teamname = "<%= teamname %>";
+        // console.log(teamname);
         myLocations = "<%= locations %>";
         myLocations = myLocations.split(",");
         managedLocations = [];
