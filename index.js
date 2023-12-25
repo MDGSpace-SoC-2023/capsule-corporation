@@ -109,6 +109,8 @@ app.get('/bstart',(req,res)=>{
 
 app.post('/logout', authController.logout);
 
+app.post('/chkPasswd', bodyParser.urlencoded(), authController.checkAdminPasswd);
+
 
 app.get('/menu_client',(req,res)=>{
     res.render('menu_client');

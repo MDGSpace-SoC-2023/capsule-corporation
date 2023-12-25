@@ -47,13 +47,39 @@ function logout(req,res){
      
 }
 
+// function checkAdmin(req,res,next){
+//     if(req.session.user && req.session.user.isAdmin){
+//         next();
+//     }else{
+//         res.redirect('/login');
+//     }
+// }
+
+function checkAdminPasswd(req,res){
+    let passwd = req.body.passwd;
+
+    if (!passwd || passwd == null || passwd == undefined) {
+        res.redirect('/admin');
+        return;
+    }
+
+    if(passwd === 'MDGSOC23'){
+        res.redirect('/menu');
+    }
+    else{
+        res.redirect('/admin');
+        return;
+    }
+}
+
 
 module.exports = {
     getSignup: getSignup,
     getLogin: getLogin,
     login: login,
     signup: signup,
-    logout:logout
+    logout:logout,
+    checkAdminPasswd:checkAdminPasswd
 };
 
 

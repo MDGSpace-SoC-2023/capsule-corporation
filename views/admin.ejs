@@ -18,17 +18,18 @@
      </div>
 
      <div class="form"> 
-
+      <form action="/chkPasswd" method="post">
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
       <div class="inputBox"> 
 
-       <input type="password" required> <i>Password</i> 
+       <input type="password" name="passwd" required> <i>Password</i> 
 
       <div class="inputBox"> 
-
-       <a href="/menu"><input type="submit" value="Enter"></a> 
+        <input type="submit" value="Enter">
+       <!-- <a href="/menu"><input type="submit" value="Enter"></a>  -->
 
       </div> 
-
+    </form>
      </div> 
 
     </div> 
