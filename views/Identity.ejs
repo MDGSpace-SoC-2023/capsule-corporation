@@ -24,9 +24,10 @@
 
       </div> 
       <div class="inputBox"> 
-
-        <a href="/admin"><input type="submit" value="Admin"></a> 
- 
+        <form action="/getAdmin" method="get">
+          <!-- <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"> -->
+        <input type="submit" value="Admin"> 
+        </form>
        </div> 
 
      </div> 

@@ -16,6 +16,9 @@ router.get('/login', authController.getLogin);
 router.post('/signup', bodyParser.urlencoded(), authController.signup);
 router.post('/login', bodyParser.urlencoded(), authController.login);
 
+router.get('/getAdmin', authController.getAdminCheck);
+router.post('/chkPasswd', bodyParser.urlencoded(), authController.checkAdminPasswd);
+
 
 const redirectUrl = "http://localhost:3000/";
 const clientId = "TgzqtF7oa0cZSY6TAndwEyGty7DCaYMhFfBk7szn";

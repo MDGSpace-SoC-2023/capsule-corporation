@@ -77,9 +77,10 @@ app.get('/', (req, res) => {
 app.get('/index', (req, res) => {
     res.render('index');
 });
-app.get('/admin', (req, res) => {
-     res.render('admin');
-});
+// app.get('/admin', (req, res) => {
+//     let inputData = req.session.inputData || {}; // Get inputData from the session
+//     res.render('admin', { inputData: inputData }); // Pass inputData to the EJS template
+// });
 app.get('/identity', (req, res) => {
     res.render('Identity');
 });
@@ -125,7 +126,7 @@ app.get('/bstart',(req,res)=>{
 
 app.post('/logout', authController.logout);
 
-app.post('/chkPasswd', bodyParser.urlencoded(), authController.checkAdminPasswd);
+
 
 
 app.get('/menu_client',(req,res)=>{

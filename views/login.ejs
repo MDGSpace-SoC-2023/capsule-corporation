@@ -16,17 +16,23 @@
      <h2>Sign In</h2> 
 
      <div class="form"> 
+      <% if (inputData.error) { %>
+        <div class="alert">
+          <h2>Invalid Input</h2>
+          <p style="color: black; font-weight: 600; font-size: 1.2rem;"><%= inputData.error %></p>
+        </div>
+      <% } %>
         <form action="/login" method="POST">
         
           <div class="inputBox"> 
 
-          <input type="number" required name="enrollementNo"> <i>Enrollment Number</i> 
+          <input type="number" required name="enrollementNo" value="<%= inputData.enrollementNo %>"> <i>Enrollment Number</i> 
 
           </div> 
 
           <div class="inputBox"> 
 
-          <input type="password" required name="password"> <i>Password</i> 
+          <input type="password" required name="password" value="<%= inputData.password %>"> <i>Password</i> 
 
           <div class="inputBox"> 
 

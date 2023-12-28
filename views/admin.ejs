@@ -18,11 +18,17 @@
      </div>
 
      <div class="form"> 
+      <% if (inputData.error) { %>
+        <div class="alert">
+          <h2>Invalid Input</h2>
+          <p style="color: black; font-weight: 600; font-size: 1.2rem;"><%= inputData.error %></p>
+        </div>
+      <% } %>
       <form action="/chkPasswd" method="post">
-        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+        <!-- <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"> -->
       <div class="inputBox"> 
 
-       <input type="password" name="passwd" required> <i>Password</i> 
+       <input type="password" name="passwd" required value="<%= inputData.passwd %>"> <i>Password</i> 
 
       <div class="inputBox"> 
         <input type="submit" value="Enter">
