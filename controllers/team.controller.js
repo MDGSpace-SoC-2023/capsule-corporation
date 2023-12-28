@@ -1,14 +1,18 @@
 const database = require('../data/database');
 const Team = require('../models/team.model');
+const sessionFlash = require('../util/session-flash');
 
+function getTeamMembers(req, res) {
 
-
-function storeData(req, res) {
     
-    // console.log(req.body)
-    // console.log(req.body.Clue)
-    // console.log(req.body.Location)
-    // console.log(req.body.Hint)
+    res.render('team_members', {inputData: sessionData});
+}
+
+
+
+ async function storeData(req, res) {
+    
+
     let data = [];
     for (let i = 0; i < req.body.Name.length; i++) {
         const participantDetails = new Team.participantDataSet(req.body.Name[i], req.body.enrollementNo[i], req.body.phonenumber[i], req.body.email[i]);
@@ -18,6 +22,128 @@ function storeData(req, res) {
     // console.log(req.body.Name)
     // console.log(data);
     const team = new Team.Team(req.body.teamname, data);
+    
+    const enteredData = {
+        teamname: req.body.teamname,
+        huntname: req.body.huntname,
+        Name: req.body.Name,
+        enrollementNo: req.body.enrollementNo,
+        phonenumber: req.body.phonenumber,
+        email: req.body.email
+    }
+    // for teamname
+
+    let existingTeam;
+    try {
+        existingTeam = await team.getTeamWithSameTeamName(enteredData.huntname, enteredData.teamname);
+    } catch (err) {
+        console.log(err);
+    }
+
+    if (existingTeam) {
+        sessionFlash.flashDataToSession(req, { error: 'Team Name not available', ...enteredData }, () => {
+            res.redirect('/team_members');
+        });
+        return;
+    }
+
+    // for enrollementNo
+    for (let i = 0; i < enteredData.enrollementNo.length; i++) {
+        let existingUser;
+        try {
+            existingUser = await team.getTeamWithSameEnrollementNo(enteredData.huntname,enteredData.enrollementNo[i]);
+            console.log(existingUser);
+        } catch (err) {
+            console.log(err);
+        }
+
+        if (existingUser) {
+            sessionFlash.flashDataToSession(req, { error: 'A pre-regesitered team member found' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+        else{
+            console.log('not found');
+        }
+    }
+
+    // for email
+    for (let i = 0; i < enteredData.email.length; i++) {
+        let existingUser;
+        try {
+            existingUser = await team.getTeamWithSameEmail(enteredData.huntname,enteredData.email[i]);
+        } catch (err) {
+            console.log(err);
+        }
+
+        if (existingUser) {
+            sessionFlash.flashDataToSession(req, { error: 'A pre-regesitered email found' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+        else{
+            console.log('not found');
+        }
+    }
+
+    // for phone number
+    for (let i = 0; i < enteredData.phonenumber.length; i++) {
+        let existingUser;
+        try {
+            existingUser = await team.getTeamWithSamePhoneNo(enteredData.huntname,enteredData.phonenumber[i]);
+        } catch (err) {
+            console.log(err);
+        }
+
+        if (existingUser) {
+            sessionFlash.flashDataToSession(req, { error: 'A pre-regesitered phone number found' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+        else{
+            console.log('not found');
+        }
+    }
+    
+    // for phone number
+    for (let i = 0; i < enteredData.phonenumber.length; i++) {
+        for (let j = i + 1; j < enteredData.phonenumber.length; j++) {
+            if (enteredData.phonenumber[i] === enteredData.phonenumber[j]) {
+                sessionFlash.flashDataToSession(req, { error: 'Duplicate Phone Number found' , ...enteredData }, () => {
+                    res.redirect('/team_members');
+                });
+                return;
+            }
+        }
+    }
+
+    // for email
+    for (let i = 0; i < enteredData.email.length; i++) {
+        for (let j = i + 1; j < enteredData.email.length; j++) {
+            if (enteredData.email[i] === enteredData.email[j]) {
+                sessionFlash.flashDataToSession(req, { error: 'Duplicate email found' , ...enteredData }, () => {
+                    res.redirect('/team_members');
+                });
+                return;
+            }
+        }
+    }
+
+    // for enrollment number
+    for (let i = 0; i < enteredData.enrollementNo.length; i++) {
+        for (let j = i + 1; j < enteredData.enrollementNo.length; j++) {
+            if (enteredData.enrollementNo[i] === enteredData.enrollementNo[j]) {
+                sessionFlash.flashDataToSession(req, { error: 'Duplicate enrollement number found' , ...enteredData }, () => {
+                    res.redirect('/team_members');
+                });
+                return;
+            }
+        }
+    }
+    
     
     console.log(req.body.teamname,data);
     
@@ -29,6 +155,16 @@ function storeData(req, res) {
 }
 
 function loadnames(req, res) {
+
+    let sessionData = sessionFlash.getSessioData(req);
+
+    if(!sessionData){
+        sessionData = {
+            teamname: '',
+            huntname: ''
+        };
+    }
+
     database.getDb().collection('upcominghunts').find().toArray().then(function (hunts) {
         // console.log(hunts);
         let names = [];
@@ -36,7 +172,8 @@ function loadnames(req, res) {
             names.push(hunt.huntname);
         }
         res.render('team_members', {
-            names: names
+            names: names,
+            inputData: sessionData
         });
         console.log(names);
     }).catch(function (err) {
@@ -46,5 +183,6 @@ function loadnames(req, res) {
 
 module.exports = {
     storeData: storeData,
-    loadnames: loadnames
+    loadnames: loadnames,
+    getTeamMembers: getTeamMembers  
 }

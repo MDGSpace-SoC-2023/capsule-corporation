@@ -14,6 +14,47 @@ class Team{
         });
     }
 
+    getTeamWithSameTeamName(huntname , teamname){
+        return db.getDb().collection(huntname).findOne({teamname: teamname});
+    }
+
+    getTeamWithSameEnrollementNo(huntname , enrollementNo){
+    
+        return db.getDb().collection(huntname).findOne({teamdata: {$elemMatch: {enrollentNo: enrollementNo}}}).then(function (team){
+            console.log(team);
+
+            if (team) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    getTeamWithSameEmail(huntname , email){
+        
+        return db.getDb().collection(huntname).findOne({teamdata: {$elemMatch: {email: email}}}).then(function (team){
+            console.log(team);
+            if (team) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    getTeamWithSamePhoneNo(huntname , phoneNo){
+        
+    
+        return db.getDb().collection(huntname).findOne({teamdata: {$elemMatch: {phoneNo: phoneNo}}}).then(function (team){
+            console.log(team);
+            if (team) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
 }
 
 class participantDataSet{
