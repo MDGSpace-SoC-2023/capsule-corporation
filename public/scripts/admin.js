@@ -101,6 +101,31 @@ function showLeaderboard(){
     insLeaderboard.appendChild(table);
 }
 
-setInterval(() => {
+const id = setInterval(() => {
     ws.send('requestLeaderboardForAdmin');
 },5000);
+
+
+function endHunt(){
+    isTimerRunning = true;
+    ws.send('endHunt');
+    toggleTimer();
+    let pauser = document.getElementById('pauser');
+    pauser.remove();
+    let cnt = document.getElementById('cnt');
+    cnt.innerHTML = 'Hunt Ended';
+    let ender = document.getElementById('ender');
+    ender.remove();
+    clearInterval(id);
+    
+}
+
+
+function pauser() {
+    let button = document.querySelector('button');
+    if (button.innerText == "Start Timer") {
+        ws.send('pause');
+    } else {
+        ws.send('resume');
+    }
+}

@@ -189,6 +189,8 @@ db.connectToDatabase().then(function (){
 });
 
 let lastMessage = null;
+let isStarted;
+let isFinished;
 let scores=[];
 let adminScores = [];
 
@@ -196,14 +198,14 @@ wss.on('connection', (ws) => {
     console.log('A user connected');
     ws.send('Welcome new client');
 
-    if (lastMessage) {
+    if (isStarted == true && isFinished == false) {
         ws.send(lastMessage);
     }
 
     ws.on('message', (message) => {
         
         console.log(`Received message: ${message}`);
-        if (message != 'requestLeaderboard' && message != 'requestLeaderboardForAdmin' ){
+        if (message != 'requestLeaderboard' && message != 'requestLeaderboardForAdmin' && message != 'endHunt' && message != 'resume' && message != 'pause'){
 
             message = JSON.parse(message);
         }
@@ -216,6 +218,8 @@ wss.on('connection', (ws) => {
                 let data = ['startedAdminPages', message[1]];
                 client.send(JSON.stringify(data));
                 lastMessage = JSON.stringify(data);
+                isStarted = true;
+                isFinished = false;
                 
             });
         }
@@ -226,6 +230,31 @@ wss.on('connection', (ws) => {
                 console.log('client')
                 client.send('giveScores');
                 
+            });
+        }
+        if(message == 'endHunt'){
+            console.log('ending hunt');
+            isFinished = true;
+            wss.clients.forEach((client) => {
+                console.log('client')
+                client.send('endHunt');
+
+            });
+        }
+        if(message == 'resume'){
+            console.log('resuming hunt');
+            wss.clients.forEach((client) => {
+                console.log('client')
+                client.send('resume');
+
+            });
+        }
+        if(message == 'pause'){
+            console.log('pausing hunt');
+            wss.clients.forEach((client) => {
+                console.log('client')
+                client.send('pause');
+
             });
         }
         if (message == 'requestLeaderboardForAdmin') {

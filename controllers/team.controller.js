@@ -10,7 +10,7 @@ function getTeamMembers(req, res) {
 
 
 
- async function storeData(req, res) {
+async function storeData(req, res) {
     
 
     let data = [];
@@ -107,6 +107,17 @@ function getTeamMembers(req, res) {
             console.log('not found');
         }
     }
+    // for enrollment number
+    for (let i = 0; i < enteredData.enrollementNo.length; i++) {
+        for (let j = i + 1; j < enteredData.enrollementNo.length; j++) {
+            if (enteredData.enrollementNo[i] === enteredData.enrollementNo[j]) {
+                sessionFlash.flashDataToSession(req, { error: 'Duplicate enrollement number found' , ...enteredData }, () => {
+                    res.redirect('/team_members');
+                });
+                return;
+            }
+        }
+    }
     
     // for phone number
     for (let i = 0; i < enteredData.phonenumber.length; i++) {
@@ -132,17 +143,7 @@ function getTeamMembers(req, res) {
         }
     }
 
-    // for enrollment number
-    for (let i = 0; i < enteredData.enrollementNo.length; i++) {
-        for (let j = i + 1; j < enteredData.enrollementNo.length; j++) {
-            if (enteredData.enrollementNo[i] === enteredData.enrollementNo[j]) {
-                sessionFlash.flashDataToSession(req, { error: 'Duplicate enrollement number found' , ...enteredData }, () => {
-                    res.redirect('/team_members');
-                });
-                return;
-            }
-        }
-    }
+    
     
     
     console.log(req.body.teamname,data);

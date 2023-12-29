@@ -28,6 +28,11 @@ ws.addEventListener('message', (event) => {
         }
     }
 
+    if(message === 'endHunt'){
+        console.log('ending hunt');
+        endHunt();
+    }
+
     if(message[0] === 'scores'){
         console.log('scores received');
         console.log(message[1]);
@@ -44,6 +49,21 @@ ws.addEventListener('message', (event) => {
     if (message === 'giveScores'){
         console.log('requesting scores');
         scoreProvider();
+    }
+
+    if(message === 'resume'){
+        isCompleted = false;
+        alert('The hunt has been resumed by the organiser!');
+        let locationChecker = document.getElementById("locationChecker");
+        locationChecker.style.display = "block";
+    }
+
+    if(message === 'pause'){
+        isCompleted = true;
+        alert('The hunt has been paused by the organiser!');
+        let locationChecker = document.getElementById("locationChecker");
+        locationChecker.style.display = "none";
+
     }
 });
 
@@ -163,6 +183,16 @@ function closePopup(){
     // table.style.display = "none";
     
 
+
+}
+
+
+
+function endHunt(){
+    isCompleted = true;
+    dontshow();
+    let center2 = document.getElementById("center2");
+    center2.innerHTML = " The hunt has been ended! ";
 
 }
 

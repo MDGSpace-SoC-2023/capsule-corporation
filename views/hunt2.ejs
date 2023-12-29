@@ -29,16 +29,18 @@
         
      </div>
      <div class="text">
-        <h2>The hunt has started and won't end untill an admin end the hunt or the timer ends</h2>
+        <h2 id="cnt">The hunt has started and won't end untill an admin end the hunt or the timer ends</h2>
     </div>
      <div class="form"> 
 
-      <div class="inputBox"> 
+      <div style="display: flex; flex-direction: row;"> 
 
       <div class="inputBox">
-        <button class="button" onclick="toggleTimer()"></button>
+        <button class="button" id="pauser" onclick="toggleTimer(), pauser()"></button>
       </div>
-
+      <div class="inputBox">
+        <button class="button" id="ender" onclick="endHunt()">End Hunt Now</button>
+      </div>
       
      </div> 
 
@@ -86,6 +88,7 @@
         clearInterval(intervalId);
         countdownEl.innerHTML = "Time's up!";
         isTimerRunning = false;
+        endHunt();
       }
     }
   
