@@ -15,7 +15,7 @@
           <div class="form" id ="form"> 
                <form action="/append" method="POST">
                 <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
-                <input type="hidden" name="huntname" value="<%= huntname %>">
+                <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
                
                 <div class="inputBox"> 
                     <input type="number" id="n_clues" name="n_clues" required > <i>Number of Extra clues</i> 

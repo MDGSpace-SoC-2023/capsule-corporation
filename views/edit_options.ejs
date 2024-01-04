@@ -16,7 +16,8 @@
  
 
         <div class="inputBox"> 
-            <form action="/editing" method="get">
+            <form action="/editing" method="post">
+              <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
             <input type="submit" value="Complete Edit">
              
@@ -25,14 +26,16 @@
 
             
             <div class="inputBox"> 
-            <form action="/appending" method="get">
+            <form action="/appending" method="post">
+              <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
                 <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
             <input type="submit" value="Add Clues"> 
           </form>
            </div> 
-       <div class="inputBox"> 
-        <form action="/Modify" method="get">
-          <input type="hidden" name="hunt" value="<%= JSON.stringify(hunt) %>">
+       <div class="inputBox">
+         <form action="/modifying" method="post">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+          <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
         <input type="submit" value="Modify existing Hunt"> 
       </form>
        </div> 

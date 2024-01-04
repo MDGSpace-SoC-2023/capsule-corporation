@@ -25,7 +25,7 @@ const team_membersController = require('./controllers/team.controller');
 const authController = require('./controllers/auth.controller');
 const startHuntController = require('./controllers/starthunt.controller');
 const enterHuntController = require('./controllers/enterhunt.controller');
-
+const editHuntController = require('./controllers/edithunt.controller');
 
 if (app.use(
     cors({
@@ -136,6 +136,37 @@ app.get('/menu_client',(req,res)=>{
         res.redirect('/index');
       }
     
+});
+
+app.get('/edit', bodyParser.urlencoded(), editHuntController.loadnames);
+app.post('/edthunt', bodyParser.urlencoded(), editHuntController.loadhunt);
+app.post('/editing', bodyParser.urlencoded(), editHuntController.completeEdit);
+app.post('/appending', bodyParser.urlencoded(), editHuntController.addClues);
+app.post('/deleting', bodyParser.urlencoded(), editHuntController.deleteClues);
+app.post('/modifying', bodyParser.urlencoded(), editHuntController.modify);
+
+app.get('/addClues', (req, res) => {
+    if (res.locals.isAuth) {
+        res.render('addClues');
+        } else {
+        res.redirect('/index');
+        }
+});
+
+app.get('/deleteClues', (req, res) => {
+    if (res.locals.isAuth) {
+        res.render('deleteClues');
+        } else {
+        res.redirect('/index');
+        }
+});
+
+app.get('/modify', (req, res) => {
+    if (res.locals.isAuth) {
+        res.render('modify');
+        } else {
+        res.redirect('/index');
+        }
 });
 
 app.get('/hunt2',(req,res)=>{
@@ -314,5 +345,4 @@ wss.on('connection', (ws) => {
     });
 });
 
-
-// leaderboard   // channel i authentication   // edit hunt
+ // channel i authentication   // edit hunt
