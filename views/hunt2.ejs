@@ -18,19 +18,24 @@
 
   <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
 
-   <div class="signin" style="left: 10%;"> 
+
+   <div class="signin"> 
 
     <div class="content"> 
 
      <div class="text">
         <h1 id="countdown">10:00</h1>
-       
-        <!-- <script src="hunt2.js"></script> -->
-        
      </div>
-     <div class="text">
-        <h2 id="cnt">The hunt has started and won't end untill an admin end the hunt or the timer ends</h2>
+
+    <div class="text" style="display: flex; flex-direction: column;">
+      <h2>Leaderboard</h2>
+      
     </div>
+    <div style=" width: 100%;">
+
+      <div id="insLeaderboard" style=" overflow-y: scroll; height: 12rem; width: 90%; "></div>
+    </div>
+    
      <div class="form"> 
 
       <div style="display: flex; flex-direction: row;"> 
@@ -47,24 +52,9 @@
     </div> 
 
    </div> 
-
-
    </div>
 
 
-
-   <div class="signin" style="left: 60%">
-    <div class="content" style="height: 20rem;">
-      <div class="text" style="display: flex; flex-direction: column;">
-        <h2>Leaderboard</h2>
-        
-      </div>
-      <div style=" width: 100%;">
-
-        <div id="insLeaderboard" style=" overflow-y: scroll; height: 12rem; width: 90%; "></div>
-      </div>
-    </div>
-   </div>
   </section> <!-- partial --> 
   <script>
     let hunt_to_strt = "<%= startedHunt %>";

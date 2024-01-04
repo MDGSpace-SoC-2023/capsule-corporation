@@ -28,16 +28,16 @@ async function enterHunt(req,res){
     const teamname = req.body.teamname;
     console.log(teamname);
 
-    const preEnteredTeam = await database.getDb().collection(collectionName).findOne({teamname : req.body.teamname});
-    if(preEnteredTeam){
-        res.redirect('/alregis');
-        return;
-    }
-    else{
-        await database.getDb().collection(collectionName).insertOne({
-            teamname : req.body.teamname
-        });
-    }
+    // const preEnteredTeam = await database.getDb().collection(collectionName).findOne({teamname : req.body.teamname});
+    // if(preEnteredTeam){
+    //     res.redirect('/alregis');
+    //     return;
+    // }
+    // else{
+    //     await database.getDb().collection(collectionName).insertOne({
+    //         teamname : req.body.teamname
+    //     });
+    // }
 
     const team = await database.getDb().collection(huntname).findOne({teamname : req.body.teamname});
     console.log(team);

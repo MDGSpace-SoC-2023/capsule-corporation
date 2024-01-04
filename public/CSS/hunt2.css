@@ -187,6 +187,10 @@ input[type="submit"]:active
     width: calc(20vw - 2px);
     height: calc(20vw - 2px);
   }
+
+  section .signin {
+    width: 100%;
+  }
 }
 
 hr {

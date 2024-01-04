@@ -106,7 +106,7 @@ function checkGeofence(mylat, mylong) {
     }
     
     const geofenceCoordinates = { lat: managedLocations[i][0], lng: managedLocations[i][1]};
-    const geofenceRadius = 1;
+    const geofenceRadius = 0.1; // in kilometers
 
     const distance = getDistance(mylat, mylong, geofenceCoordinates.lat, geofenceCoordinates.lng);
 

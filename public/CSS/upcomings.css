@@ -180,13 +180,34 @@ input[type="submit"]:active
     height: calc(10vw - 2px);
   }
 }
-@media (max-width: 600px)
+@media only screen and (max-width: 600px)
 {
   section span 
   {
     width: calc(20vw - 2px);
     height: calc(20vw - 2px);
   }
+
+  section .signin
+  {
+    width: 90%;
+  }
+
+  section .signin .content 
+  {
+    width: 100%;
+  }
+
+  section .signin .content h2 
+  {
+    font-size: 1.5em;
+  }
+
+  section .signin .content .form .inputBox input 
+  {
+    padding: 15px 10px 7.5px;
+  }
+  
 }
 
 .addednames{
@@ -216,3 +237,4 @@ input[type="submit"]:active
   border-color: #3498db; /* Change border color on hover or focus */
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Add a subtle box shadow on hover or focus */
 }
+
