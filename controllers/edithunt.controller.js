@@ -40,7 +40,8 @@ function completeEdit(req, res) {
     }).then(function (hunt) {
         console.log(hunt);
         res.render('huntinfo', {
-            hunt: hunt
+            hunt: hunt,
+            huntNames:''
         });
     }).catch(function (err) {
         console.log(err);

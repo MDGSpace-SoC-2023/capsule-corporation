@@ -39,9 +39,11 @@
            </div> 
         
           </section> <!-- partial --> 
-          <script src="./scripts/huntinfo.js"></script>
           <script>
+            let huntnames = '<%= huntNames %>';
+            console.log(huntnames);
             document.getElementById('route').value = window.location.pathname;
-          </script>
+            </script>
+            <script src="./scripts/huntinfo.js"></script>
           <%- include ('./includes/foot') %>
 

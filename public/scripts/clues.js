@@ -25,12 +25,14 @@ setInterval(function(){
 function toggle() {
     var x = document.getElementById("hint");
     var y = document.getElementById("buttonText");
+    var z = document.getElementById("center_buttons");
     if (x.style.display === "none") {
         x.style.display = "block";
         y.innerHTML = "Hide Hint";
         let myScore = document.getElementById("myScore");
         score = score - 50;
         myScore.innerHTML = 'Score: ' + (score);
+        z.style.display = "none";
         
     } 
     else {
@@ -137,6 +139,10 @@ function simulateNextClueOpening() {
 
     let hint = document.getElementById("hint");
     hint.innerHTML = myHints[j];
+
+    let hint_button = document.getElementById("center_buttons");
+    hint_button.style.display = "block";
+    toggle();
 
 }
 

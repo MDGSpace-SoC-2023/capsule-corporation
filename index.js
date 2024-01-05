@@ -92,16 +92,20 @@ app.get('/menu', (req, res) => {
 });
 app.get('/huntinfo', (req, res) => {
     if (res.locals.isAuth) {
-        
-        res.render('huntinfo',{
-            hunt:{
-                huntname:'',
-                data:[]
-            }
+        db.getDb().collection('hunts').find().toArray().then(function (hunts) {
+            const huntNames = hunts.map(hunt => hunt.huntname);
+            console.log(huntNames);
+            res.render('huntinfo', {
+                hunt: {
+                    huntname: '',
+                    data: []
+                },
+                huntNames: huntNames // This is the array of hunt names
+            });
         });
-      } else { 
+    } else { 
         res.redirect('/index');
-      }
+    }
 });
 
 app.get('/starter', bodyParser.urlencoded(), startHuntController.loadnames);

@@ -1,5 +1,5 @@
 const Hunt = require('../models/hunt.model');
-const database = require('../data/database');
+const sessionFlash = require('../util/session-flash');
 
 
 async function storeData(req, res) {

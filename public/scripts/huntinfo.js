@@ -1,7 +1,17 @@
 var map;
 var clickedLocation;
 function add(){
-     
+    let huntname = document.getElementById('huntname').value;
+    console.log(huntname);
+    huntnames = huntnames.split(',');
+    for (let i=0;i<huntnames.length;i++){
+        if(huntnames[i] == huntname){
+            alert("Hunt name already exists");
+            document.getElementById('huntname').value = '';
+            return;
+        }
+    }
+
     let n_clues = document.getElementById('n_clues').value;
 
     if(n_clues<1){
