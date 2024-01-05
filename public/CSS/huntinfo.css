@@ -186,11 +186,20 @@ input[type="submit"]:active
 }
 @media (max-width: 600px)
 {
+
+  section .signin
+  {
+    width: 100%;
+    padding: 20px;
+  }
+
   section span 
   {
     width: calc(20vw - 2px);
     height: calc(20vw - 2px);
   }
+
+ 
 }
 
 .dom-inputs{
@@ -318,7 +327,4 @@ input[type="submit"]:active
   padding: 1rem 0rem;
   border: 2px solid black;
   border-radius: 2rem;
-}
-.clue-container{
-  
 }
