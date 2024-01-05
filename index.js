@@ -27,8 +27,8 @@ const startHuntController = require('./controllers/starthunt.controller');
 const enterHuntController = require('./controllers/enterhunt.controller');
 const editHuntController = require('./controllers/edithunt.controller');
 
-if (app.use(
-    cors({
+
+app.use(cors({
         // origin: utils.allowedDomains(),
         origin: false,
         referer: "*",
@@ -37,11 +37,8 @@ if (app.use(
         "Authorization",
         "Access-Control-Allow-Origin"
         ]
-    })
-)){
-    console.log("cors enabled");
+    }));
 
-}
 
 
 
@@ -95,7 +92,13 @@ app.get('/menu', (req, res) => {
 });
 app.get('/huntinfo', (req, res) => {
     if (res.locals.isAuth) {
-        res.render('huntinfo');
+        
+        res.render('huntinfo',{
+            hunt:{
+                huntname:'',
+                data:[]
+            }
+        });
       } else { 
         res.redirect('/index');
       }

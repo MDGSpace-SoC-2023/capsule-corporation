@@ -32,6 +32,15 @@
             <input type="submit" value="Add Clues"> 
           </form>
            </div> 
+
+           <div class="inputBox">
+            <form action="/deleting" method="post">
+             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+             <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+           <input type="submit" value="Delete Clues"> 
+         </form>
+          </div>
+
        <div class="inputBox">
          <form action="/modifying" method="post">
           <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">

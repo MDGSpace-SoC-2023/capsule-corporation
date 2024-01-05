@@ -13,9 +13,10 @@
           <!-- <h2>Sign In</h2>  -->
           
           <div class="form" id ="form"> 
-               <form action="/append" method="POST">
+               <form action="/savehunt" method="POST">
                 <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
                 <input type="hidden" name="huntname" value="<%= hunt.huntname %>">
+                <input type="hidden" name="route" id="route">
                
                 <div class="inputBox"> 
                     <input type="number" id="n_clues" name="n_clues" required > <i>Number of Extra clues</i> 
@@ -25,9 +26,9 @@
                 </form>
                 
         
-              <div class="inputBox"> 
+              <div class="inputBox" style="text-align: center;"> 
         
-                <button type="submit" onclick = "add()">Enter</button>
+                <button type="submit" id="enter_btn"  onclick = "add()">Enter</button>
                  
         
               </div> 
@@ -40,5 +41,8 @@
         
           </section> <!-- partial --> 
           <script src="./scripts/huntinfo.js"></script>
+          <script>
+            document.getElementById('route').value = window.location.pathname;
+          </script>
           <%- include ('./includes/foot') %>
 

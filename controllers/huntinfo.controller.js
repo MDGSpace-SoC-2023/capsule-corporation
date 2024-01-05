@@ -1,7 +1,8 @@
 const Hunt = require('../models/hunt.model');
+const database = require('../data/database');
 
 
-function storeData(req, res) {
+async function storeData(req, res) {
     let data = [];
     if (Array.isArray(req.body.Clue)) {
         for (let i = 0; i < req.body.Clue.length; i++) {
@@ -12,14 +13,30 @@ function storeData(req, res) {
         const dataSet = new Hunt.dataSet(req.body.Clue, req.body.Location, req.body.Hint);
         data.push(dataSet);
     }
-    const hunt = new Hunt.Hunt(req.body.huntname, data);
     console.log(req.body.huntname,data);
-    hunt.savehuntname();
-    hunt.Save().then(function () {
+    const route = req.body.route;
+    
+    const hunt = new Hunt.Hunt(req.body.huntname, data);
+
+    if (route === '/editing') {
+        await hunt.SaveCompleteEdit();
         res.redirect('/menu');
-    }).catch(function (err) {
-        console.log(err);
-    });
+    } else if (route === '/appending') {
+        await hunt.SaveAddedClue();
+        res.redirect('/menu');
+    } else if (route === '/deleting') {
+        await hunt.Save();
+        await hunt.SaveDeletedHunt();
+        res.redirect('/menu');
+    } else if (route === '/modifying') {
+        res.redirect('/menu');
+        await hunt.SaveEditedClues();
+    } else {
+        await hunt.savehuntname();
+        await hunt.Save();
+        res.redirect('/menu');
+    }
+    
 }
 
 

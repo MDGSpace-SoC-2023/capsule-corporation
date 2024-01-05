@@ -313,3 +313,12 @@ input[type="submit"]:active
     color: #0f0;
     cursor: pointer;
 }
+.dropped{
+  background-color: red;
+  padding: 1rem 0rem;
+  border: 2px solid black;
+  border-radius: 2rem;
+}
+.clue-container{
+  
+}

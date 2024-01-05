@@ -31,8 +31,39 @@ class Hunt {
         });
     }
 
-        
-    
+    async SaveCompleteEdit() {
+        await db.getDb().collection('hunts').updateOne(
+            { huntname: this.huntname },
+            { $set: { data: this.data } },
+            { upsert: true }
+        );
+    }
+
+    async SaveAddedClue() {
+        const hunt = await this.getHunt();
+        hunt.data = hunt.data.concat(this.data);
+        console.log(hunt.data)
+        await db.getDb().collection('hunts').updateOne(
+            { huntname: this.huntname },
+            { $set: { data: hunt.data } }
+        );
+    }
+
+    async SaveDeletedHunt() {
+        await db.getDb().collection('hunts').deleteOne({ huntname: this.huntname });
+    }
+
+    async SaveEditedClues() {
+        await db.getDb().collection('hunts').updateOne(
+            { huntname: this.huntname },
+            { $set: { data: this.data } },
+            { upsert: true }
+        );
+    }
+
+    async getHunt() {
+        return await db.getDb().collection('hunts').findOne({ huntname: this.huntname });
+    }
 }
 
 
