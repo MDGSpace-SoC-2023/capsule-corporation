@@ -30,12 +30,17 @@ function loadHunt(req,res){
         
 }
 
-function startHunt(req,res){
-    // some geofencing code
+async function startHunt(req,res){
+    
+    await database.getDb().collection('startedHunts').insertOne({huntname : req.body.huntname}).then(function (hunt) {
+        console.log("saved started hunt")
+    }).catch(function (err) {
+        console.log(err);
+    });
 
-    // some code to start the hunt
     let startedHunt = req.body.huntname;
-    // console.log(startedHunt);
+    console.log(startedHunt);
+    console.log('Hunt started');
     res.render('hunt2',{
         startedHunt : startedHunt
     

@@ -180,7 +180,7 @@ input[type="submit"]:active
     height: calc(10vw - 2px);
   }
 }
-@media (max-width: 600px)
+@media only screen and (max-width: 600px)
 {
   section span 
   {
@@ -188,9 +188,10 @@ input[type="submit"]:active
     height: calc(20vw - 2px);
   }
 
-  section .signin {
-    width: 100%;
-  }
+  section .signin
+{
+  width:100%;
+}
 }
 
 hr {

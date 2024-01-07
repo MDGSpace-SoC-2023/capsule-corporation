@@ -31,6 +31,17 @@ async function storeData(req, res) {
         phonenumber: req.body.phonenumber,
         email: req.body.email
     }
+
+
+    //for no registerations
+
+    const hunt = await database.getDb().collection('startedHunts').findOne({ huntname: enteredData.huntname });
+    if(hunt && hunt.huntname){
+        sessionFlash.flashDataToSession(req, { error: 'No registrations allowed' , ...enteredData }, () => {
+            res.redirect('/team_members');
+        });
+        return;
+    }
     // for teamname
 
     let existingTeam;

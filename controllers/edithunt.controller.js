@@ -78,6 +78,33 @@ function deleteClues(req, res) {
     });
 }
 
+
+function deleteHunt(req,res){
+    const huntname = req.body.huntname;
+    console.log(huntname);
+    database.getDb().collection('hunts').deleteOne({
+        huntname: huntname
+    }).then(function (hunt) {
+        database.getDb().collection('upcominghunts').deleteOne({
+            huntname: huntname
+        }).then(function (hunt) {
+            database.getDb().collection(huntname).drop().then(function (hunt) {
+                database.getDb().collection('enteredinto_' + huntname).drop().then(function (hunt) {
+                    res.redirect('/menu');
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
 function modify(req, res) {
     const huntname = req.body.huntname;
     console.log(huntname);
@@ -99,5 +126,6 @@ module.exports = {
     completeEdit: completeEdit,
     addClues: addClues,
     deleteClues: deleteClues,
-    modify: modify
+    modify: modify,
+    deleteHunt: deleteHunt
 };

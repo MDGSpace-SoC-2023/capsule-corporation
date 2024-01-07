@@ -9,6 +9,7 @@ console.log(hunt_to_start);
 ws.addEventListener('open', () => {
     let data = ['Serve', hunt_to_start];
     ws.send(JSON.stringify(data));
+    
 });
 
 ws.addEventListener('message', (event) => {
@@ -112,7 +113,7 @@ function endHunt(){
     toggleTimer();
     let pauser = document.getElementById('pauser');
     pauser.remove();
-    let cnt = document.getElementById('cnt');
+    let cnt = document.getElementById('countdown');
     cnt.innerHTML = 'Hunt Ended';
     let ender = document.getElementById('ender');
     ender.remove();
@@ -122,10 +123,16 @@ function endHunt(){
 
 
 function pauser() {
-    let button = document.querySelector('button');
+    // let button = document.querySelector('button');
+    let button = document.getElementById('pauser');
     if (button.innerText == "Start Timer") {
         ws.send('pause');
     } else {
         ws.send('resume');
     }
 }
+
+
+
+
+//ebSocket is already in CLOSING or CLOSED state.

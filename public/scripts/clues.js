@@ -1,5 +1,6 @@
 let i=0;
 let j=0;
+let flag = true;
 
 
 
@@ -25,14 +26,16 @@ setInterval(function(){
 function toggle() {
     var x = document.getElementById("hint");
     var y = document.getElementById("buttonText");
-    var z = document.getElementById("center_buttons");
     if (x.style.display === "none") {
         x.style.display = "block";
         y.innerHTML = "Hide Hint";
         let myScore = document.getElementById("myScore");
-        score = score - 50;
+        if (flag == true) {
+            score = score - 50;
+        }
         myScore.innerHTML = 'Score: ' + (score);
-        z.style.display = "none";
+        flag = false;
+        
         
     } 
     else {
@@ -108,7 +111,7 @@ function checkGeofence(mylat, mylong) {
     }
     
     const geofenceCoordinates = { lat: managedLocations[i][0], lng: managedLocations[i][1]};
-    const geofenceRadius = 0.1; // in kilometers
+    const geofenceRadius = 10; // in kilometers
 
     const distance = getDistance(mylat, mylong, geofenceCoordinates.lat, geofenceCoordinates.lng);
 
@@ -129,7 +132,7 @@ function checkGeofence(mylat, mylong) {
 
 function simulateNextClueOpening() {
     j++;
-    
+    flag = true;
     let myScore = document.getElementById("myScore");
     score = score + 100;
     myScore.innerHTML = 'Score: ' + (score);

@@ -9,6 +9,7 @@
   <title>Entering Admin Rights</title> 
 
   <link rel="stylesheet" href="./CSS/hunt2.css"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
 
 
@@ -44,7 +45,9 @@
         <button class="button" id="pauser" onclick="toggleTimer(), pauser()"></button>
       </div>
       <div class="inputBox">
+        <form action="/endingHunt" method="post">
         <button class="button" id="ender" onclick="endHunt()">End Hunt Now</button>
+      </form>
       </div>
       
      </div> 

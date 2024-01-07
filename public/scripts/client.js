@@ -173,12 +173,10 @@ function closePopup(){
     top.style.display = "flex";
     bottom.style.display = "block";
     form.style.display = "block";
-    if(isCompleted == false){
+    if(isCompleted == false && center_buttons.style.display == "none"){
         center_buttons.style.display = "block";
     }
-    else{
-        center_buttons.style.display = "none";
-    }
+    
     leaderboard.style.display = "none";
     // table.style.display = "none";
     

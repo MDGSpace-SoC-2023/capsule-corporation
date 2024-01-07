@@ -150,6 +150,7 @@ app.post('/edthunt', bodyParser.urlencoded(), editHuntController.loadhunt);
 app.post('/editing', bodyParser.urlencoded(), editHuntController.completeEdit);
 app.post('/appending', bodyParser.urlencoded(), editHuntController.addClues);
 app.post('/deleting', bodyParser.urlencoded(), editHuntController.deleteClues);
+app.post('/deleting2', bodyParser.urlencoded(), editHuntController.deleteHunt);
 app.post('/modifying', bodyParser.urlencoded(), editHuntController.modify);
 
 app.get('/addClues', (req, res) => {
@@ -210,7 +211,16 @@ app.get('/unreg',(req,res)=>{
     }   
 });
 
-
+app.post('/endHunt', (req, res) => {
+    db.collection('startedHunts').drop()
+        .then(() => {
+            res.send('Collection dropped successfully');
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('Error dropping collection');
+        });
+});
 
 app.get('/team_members', bodyParser.urlencoded(), team_membersController.loadnames);
 

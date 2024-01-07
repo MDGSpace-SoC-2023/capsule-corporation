@@ -30,7 +30,7 @@
         <form action="/starthunt" method="post" >
           <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             
-            <input type="text" name="huntname" style="display: none;" value=<%= hunt.huntname %> >
+            <input type="hidden" name="huntname" value="<%= hunt.huntname %>" >
 
             <input type="submit" value="Start"> 
         </form>
@@ -42,6 +42,8 @@
     </div> 
 
    </div> 
+
+   </div>
 
   </section> <!-- partial --> 
 
