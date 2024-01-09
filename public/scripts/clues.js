@@ -145,7 +145,10 @@ function simulateNextClueOpening() {
 
     let hint_button = document.getElementById("center_buttons");
     hint_button.style.display = "block";
-    toggle();
+    
+    if(hint.style.display == "block"){
+        toggle();
+    }
 
 }
 
@@ -170,5 +173,18 @@ function deg2rad(deg) {
 }
 
 function sendMail(){
-    //.....
+    const mailOptions = {
+        from: 'mayankdhardwivedi01@gmail.com',
+        to: 'mayankdhardwivedi01@gmail.com',
+        subject: 'R-Land Hunt',
+        text: 'Congratulations! You have completed the hunt!'
+    }
+    fetch('/sendMail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(mailOptions)
+
+    })
 }

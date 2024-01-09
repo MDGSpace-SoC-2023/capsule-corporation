@@ -6,6 +6,7 @@ const cors = require('cors');
 const csrf = require('csurf');
 const geolaocation = require('geolocation');
 const expressSession = require('express-session');
+const nodemailer = require('nodemailer');
 const authRoutes = require('./routes/auth.routes');
 const app = express();
 
@@ -26,6 +27,7 @@ const authController = require('./controllers/auth.controller');
 const startHuntController = require('./controllers/starthunt.controller');
 const enterHuntController = require('./controllers/enterhunt.controller');
 const editHuntController = require('./controllers/edithunt.controller');
+const Oauthroutes = require('./routes/Oauth.routes');
 
 
 app.use(cors({
@@ -39,31 +41,49 @@ app.use(cors({
         ]
     }));
 
+    
+    
+    const sessionConfig = createSessionConfig();
+    app.use(expressSession(sessionConfig));
+    
+    app.use(authRoutes);
+    
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'ejs');
+    
+    app.use(express.static('public'));
+    
+    app.post('/sendMail', bodyParser.json(), (req, res) => {
+        const mailOptions = req.body;
+        console.log(mailOptions);
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'mayankdhardwivedi01@gmail.com',
+                pass: 'xctg qidy tyqi bgaa'
+            }
+        })
 
-
-
-const sessionConfig = createSessionConfig();
-app.use(expressSession(sessionConfig));
-
-app.use(authRoutes);
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(express.static('public'));
-
-
-
-app.use(csrf());
-
-app.use(addCsrfTokenMiddleware);
-app.use(express.urlencoded({ extended: true }));
-
-app.use(checkAuthStatus);
-
-app.get('/', (req, res) => {
+        transporter.sendMail(mailOptions, function (err, data) {
+            if (err) {
+                console.log('Error Occurs '+ err);
+            } else {
+                console.log('Email sent!!!');
+            }
+        });
+    });
+    
+    app.use(csrf());
+    
+    app.use(addCsrfTokenMiddleware);
+    app.use(express.urlencoded({ extended: true }));
+    
+    app.use(checkAuthStatus);
+    
+    app.use(Oauthroutes);
+    app.get('/', (req, res) => {
     if (res.locals.isAuth) {
       res.redirect('/identity');
     } else {
