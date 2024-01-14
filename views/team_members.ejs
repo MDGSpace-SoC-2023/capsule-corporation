@@ -11,6 +11,7 @@
     <script src="/scripts/team_members.js"></script>
 </head>
 <body>
+    
   <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
 </section>
 <div class="container" id="container" style="z-index: 10; padding: 2rem;">
@@ -22,7 +23,7 @@
         <br><br>
       <% } %>
 
-    
+      <%- include ('../views/includes/back') %>
     <h1 class="main-heading">Team Information</h1>
     <hr>
     <!-- form start -->
@@ -53,7 +54,7 @@
             </div>
             <div class="input-div">
                 <input type="text" class="form-control-input" id="team-name" name="teamname" value="<%= inputData.teamname%>" required>
-                <div class="help-text">Enter Team Name</div>
+                
             </div>
         </div>
         <!-- Team Name Ends -->
@@ -67,19 +68,22 @@
                 <div class="member-input">
                     <h4>Member 1</h4>
                     <input type="text" class="form-control-input" placeholder="Enter Team Captain Name" name="Name"  required>
-                    <input type="text" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
-                    <input type="tel" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
+                    <input type="number" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
+                    <input type="number" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
                     <input type="email" class="form-control-input" placeholder="Enter Email" name="email"  required>
                 </div>
                 <div class="member-input">
                     <h4>Member 2</h4>
                     <input type="text" class="form-control-input" placeholder="Enter Member Name" name="Name" required>
-                    <input type="text" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
-                    <input type="tel" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
+                    <input type="number" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
+                    <input type="number" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
                     <input type="email" class="form-control-input" placeholder="Enter Email" name="email"  required>
                 </div>
             </div>
-            <button type="button" onclick="addMember()">Add Member</button>
+            <div class="buttons">
+                <button type="button" class="button button1" onclick="addMember()">Add Member</button>
+                <button type="button" class="button button1" id="removeButton" onclick="removeMember()">Remove Member</button>
+            </div>
         </div>
         <!-- Team Members Ends --> 
 
@@ -90,15 +94,25 @@
     <!-- form ends -->
 </div>
 
-<script>
+<script> 
+    var memberCount = $("#members .member-input").length;
+    // console.log(memberCount);
+    function checkMembers() {
+        console.log(memberCount);
+        if(memberCount < 3) {
+            $("#removeButton").hide();
+        } else {
+            $("#removeButton").show();
+        }
+    }
     function addMember() {
-        var memberCount = $("#members .member-input").length + 1;
+        
         var newMember = `
             <div class="member-input" style="display: none;">
                 <h4>Member ${memberCount}</h4>
                 <input type="text" class="form-control-input" placeholder="Enter Member Name" name="Name" required>
-                <input type="text" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
-                <input type="tel" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
+                <input type="number" class="form-control-input" placeholder="Enter Enrollment Number" name = "enrollementNo"  required>
+                <input type="number" class="form-control-input" placeholder="Enter Phone Number" name="phonenumber"  required>
                 <input type="email" class="form-control-input" placeholder="Enter Email" name="email" required>
             </div>
         `;
@@ -109,7 +123,19 @@
         $("html, body").animate({
             scrollTop: $("#members .member-input:last-child").offset().top
         }, 500);
+        memberCount++;
+        checkMembers();
     }
+
+    function removeMember() {
+        $("#members .member-input:last-child").slideUp(function() {
+            $(this).remove();
+        });
+        memberCount--;
+        checkMembers();
+    }
+
+    checkMembers();
 </script>
 
 <%- include ('./includes/foot') %>

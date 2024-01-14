@@ -15,7 +15,16 @@
 
      <div class="form"> 
  
+      <% if(error) { %> 
 
+        <div class="alert"> 
+
+          <h2>Invalid Input</h2> 
+
+          <p style="color: black; font-weight: 600; font-size: 1.2rem;"><%= error %></p> 
+
+        </div>
+        <% } %>
       <div class="inputBox"> 
 
        <input type="submit" value="Create a Hunt" onclick="redirectToAnotherPage1()"> 

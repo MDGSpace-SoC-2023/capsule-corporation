@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -61,8 +61,8 @@ app.use(cors({
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'mayankdhardwivedi01@gmail.com',
-                pass: 'xctg qidy tyqi bgaa'
+                user: 'kacoder2@gmail.com',
+                pass: 'guup ogjx azxs xurd'
             }
         })
 
@@ -75,6 +75,15 @@ app.use(cors({
         });
     });
     
+    app.post('/rm_strtd_hunt_data',(req,res)=>{
+        console.log(req.body.huntname);
+        db.getDb().collection('startedHunts').drop().then(function(){
+            console.log('done');    
+        }).catch(function(err){
+            console.log(err);
+        });
+    });
+
     app.use(csrf());
     
     app.use(addCsrfTokenMiddleware);

@@ -32,6 +32,35 @@ async function storeData(req, res) {
         email: req.body.email
     }
 
+    //for validations
+
+    for(let i=0;i<enteredData.enrollementNo.length;i++){
+        if(enteredData.enrollementNo[i].length != 8){
+            sessionFlash.flashDataToSession(req, { error: 'Entered Enrollment Number must have 8 digits' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+    }
+
+    for(let i=0;i<enteredData.phonenumber.length;i++){
+        if(enteredData.phonenumber[i].length != 10){
+            sessionFlash.flashDataToSession(req, { error: 'Entered Phone Number must have 10 digits' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+    }
+
+    for(let i=0;i<enteredData.email.length;i++){
+        if(!enteredData.email[i].includes('@')){
+            sessionFlash.flashDataToSession(req, { error: 'Entered Email is not valid' , ...enteredData }, () => {
+                res.redirect('/team_members');
+            });
+            return;
+        }
+    }
+
 
     //for no registerations
 

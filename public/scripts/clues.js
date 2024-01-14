@@ -174,8 +174,8 @@ function deg2rad(deg) {
 
 function sendMail(){
     const mailOptions = {
-        from: 'mayankdhardwivedi01@gmail.com',
-        to: 'mayankdhardwivedi01@gmail.com',
+        from: 'kacoder2@gmail.com',
+        to: captainMail,
         subject: 'R-Land Hunt',
         text: 'Congratulations! You have completed the hunt!'
     }

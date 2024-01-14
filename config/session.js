@@ -3,7 +3,7 @@ const expressSession = require('express-session');
 function createSessionStore() {
     const MongoDBstore = mongoDbStore(expressSession);
     const store = new MongoDBstore({
-        uri: 'mongodb://127.0.0.1:27017',
+        uri: process.env.MONGODB_URL,
         collection: 'sessions',
         databaseName: 'hunt'
     });
@@ -11,14 +11,14 @@ function createSessionStore() {
     return store;
 }
 
-function createSessionConfig(){
+function createSessionConfig() {
     return {
-        secret : 'some-secret-value',
+        secret: 'some-secret-value',
         resave: false,
         saveUninitialized: false,
-        store : createSessionStore(),
-        cookie : {
-            maxAge : 1*24*60*60*1000
+        store: createSessionStore(),
+        cookie: {
+            maxAge: 1 * 24 * 60 * 60 * 1000
         }
     }
 }

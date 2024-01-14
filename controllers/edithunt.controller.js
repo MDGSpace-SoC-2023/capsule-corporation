@@ -1,5 +1,5 @@
 const database = require('../data/database');
-
+const sessionFlash = require('../util/session-flash');
 function loadnames(req, res) {
     database.getDb().collection('upcominghunts').find().toArray().then(function (hunts) {
         // console.log(hunts);
@@ -82,27 +82,41 @@ function deleteClues(req, res) {
 function deleteHunt(req,res){
     const huntname = req.body.huntname;
     console.log(huntname);
-    database.getDb().collection('hunts').deleteOne({
-        huntname: huntname
-    }).then(function (hunt) {
-        database.getDb().collection('upcominghunts').deleteOne({
-            huntname: huntname
-        }).then(function (hunt) {
-            database.getDb().collection(huntname).drop().then(function (hunt) {
-                database.getDb().collection('enteredinto_' + huntname).drop().then(function (hunt) {
-                    res.redirect('/menu');
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            }).catch(function (err) {
+    database.getDb().collection('startedHunts').findOne({huntname:huntname}).then(function(hunt){
+        if(hunt){
+            res.render('menu')
+        }
+        else{
+            database.getDb().collection('hunts').deleteOne({huntname:huntname}).then(function(){
+                console.log('done');    
+            }).catch(function(err){
                 console.log(err);
             });
-        }).catch(function (err) {
-            console.log(err);
-        });
-    }).catch(function (err) {
+
+            database.getDb().collection('upcominghunts').deleteOne({huntname:huntname}).then(function(){
+                console.log('done');
+            }).catch(function(err){
+                console.log(err);
+            });
+
+            database.getDb().collection(huntname).drop().then(function(){
+                console.log('done');
+            }).catch(function(err){
+                console.log(err);
+            });
+
+            database.getDb().collection('enteredinto_'+huntname).drop().then(function(){
+                console.log('done');
+            }).catch(function(err){
+                console.log(err);
+            });
+
+            res.redirect('/menu');
+        }
+    }).catch(function(err){
         console.log(err);
-    });
+    }
+    );
 }
 
 function modify(req, res) {

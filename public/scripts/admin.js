@@ -1,3 +1,5 @@
+
+
 const ws = new WebSocket('ws://localhost:3000');
 
 let hunt_to_start = hunt_to_strt;
@@ -118,6 +120,18 @@ function endHunt(){
     let ender = document.getElementById('ender');
     ender.remove();
     clearInterval(id);
+
+    const data= {
+        huntname: hunt_to_start
+        
+    }
+    fetch('/rm_strtd_hunt_data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
     
 }
 
