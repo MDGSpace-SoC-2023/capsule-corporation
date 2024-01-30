@@ -13,10 +13,10 @@ R-Land Hunt offers the following key features:
 
 The application includes two sections, one for the admin and another for the participants.
 
-Participants Section : A user-friendly mobile app for participants to engage in the scavenger hunt. It allows users to:
+Participants Section : A user-friendly web app for participants to engage in the scavenger hunt. It allows users to:
 
     - View the leaderboard to track their progress and rankings.
-    - Access and collect clues, which are location-restricted files, as they reach specific         geographic areas.
+    - Access and collect clues, which are location-restricted clues, as they reach specific         geographic areas.
     - Take negative points in exchange for hints to the next clue.
 
 Admin Section : An admin section that enables game organizers to manage the scavenger hunt. It provides the following capabilities:
@@ -28,7 +28,7 @@ Admin Section : An admin section that enables game organizers to manage the scav
 ## Demo 🕹️
 
 You can watch the demo Video by clicking the following link:-
-
+https://www.youtube.com/watch?v=W3-gEywYcHw&ab_channel=QuirkSpace
 
 
 ## Installation ⚡
@@ -36,8 +36,8 @@ You can watch the demo Video by clicking the following link:-
 1. Clone this repo by running the following command :-
 
 ```bash
+  git init
   git clone https://github.com/kartik-ag/R-Land-Hunt.git
-  cd R-Land-Hunt
 ```
 
 2. Now install all the required packages(frontend & backend) by running the following commands :-
