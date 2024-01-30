@@ -30,7 +30,6 @@ Admin Section : An admin section that enables game organizers to manage the scav
 You can watch the demo Video by clicking the following link:-
 https://www.youtube.com/watch?v=W3-gEywYcHw&ab_channel=QuirkSpace
 
-
 ## Installation ⚡
 
 1. Clone this repo by running the following command :-
