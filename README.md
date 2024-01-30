@@ -28,8 +28,7 @@ Admin Section : An admin section that enables game organizers to manage the scav
 ## Demo 🕹️
 
 You can watch the demo Video by clicking the following link:-
-
-
+https://www.youtube.com/watch?v=W3-gEywYcHw&ab_channel=QuirkSpace
 
 ## Installation ⚡
 
@@ -55,7 +54,7 @@ You can watch the demo Video by clicking the following link:-
 ```
 
 4. 🎉 Open your browser and go to https://localhost:3000
-https://www.youtube.com/watch?v=W3-gEywYcHw&ab_channel=QuirkSpace
+
 
 ## Tech Stack 💻
 
